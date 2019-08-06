@@ -1,16 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="BotClient.MainPage">
+<ContentPage
+    x:Class="BotClient.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <ListView
+                x:Name="MessagesListView"
+                Grid.Row="0"
+                BackgroundColor="Silver"
+                ItemsSource="{Binding ConversationList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Text}" TextColor="Black" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                IsRunning="{Binding ProgressVisible}" />
+            <Entry x:Name="Message" Grid.Row="2" />
+            <Button
+                x:Name="SendButton"
+                Grid.Row="3"
+                BackgroundColor="Orange"
+                Clicked="SendButton_Clicked"
+                Text="Send" />
+        </Grid>
+
+    </ContentPage.Content>
 
 </ContentPage>
